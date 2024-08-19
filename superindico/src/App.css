@@ -1,0 +1,15 @@
+.App{
+    display: grid;
+}
+
+header.header{
+    grid-area: header;
+}
+
+main.conteudo{
+    grid-area: conteudo;
+}
+
+footer.footer{
+    grid-area: footer;
+}
