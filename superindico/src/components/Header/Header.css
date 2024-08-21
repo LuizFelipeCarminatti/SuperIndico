@@ -1,0 +1,52 @@
+div.menu{
+    position: fixed;
+    width: 60%;
+    height: 100px;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #cecece;
+    background-color: #fff;
+}
+
+div.logo{
+    width: 200px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.logo img{
+    width: 100%;
+}
+
+div.btnLogin button{
+    margin-left: 10px;
+    border: none;
+    padding: 20px;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+div.btnLogin button:hover{
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
+
+div.btnLogin button a{
+    color: #16e2eb;
+    text-decoration: none;
+}
+
+header.header div.menu div.btnLogin button.procurar{
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
+
+header.header div.menu div.btnLogin button.procurar a {
+    color: #16e2eb;
+}

@@ -1,0 +1,42 @@
+footer.footer div.footerBody{
+    width: 60%;
+    margin: auto;
+}
+
+footer.footer div.footerMain{
+    height: 50px;
+    text-align: center;
+    background-color: #f0f0f0;
+    padding-top: 15px;
+}
+
+footer.footer div.footerMain span{
+    color: #16e2eb;
+}
+
+footer.footer div.footerBody div.empresa{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px;
+    border-top: 1px solid #cecece;
+}
+
+footer.footer div.footerBody div.redeSociais{
+    padding: 20px;
+}
+
+footer.footer div.footerBody div.redeSociais .facebook{
+    font-size: 50px;
+    color: #36518a;
+    margin-right: 20px;
+}
+
+footer.footer div.footerBody div.redeSociais .instagram{
+    font-size: 50px;
+    color: #f80c56;
+}
+
+footer.footer div.footerBody div.redeSociais h1{
+    color: #272727;
+}
