@@ -1,0 +1,38 @@
+section.espacoLogin{
+    width: 60%;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    padding-left: 100px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #16e2eb;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+form.formLogin{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+section.espacoLogin form.formLogin input{
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #b0adad;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+section.espacoLogin form button {
+    width: 100%;
+    border: none;
+    background-color: #06565a;
+    color: #fff;
+    height: 40px;
+}
+
+.imagemDeLogin{
+    width: 40%;
+}

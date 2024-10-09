@@ -1,0 +1,80 @@
+main.conteudo section{
+    width: 60%;
+    margin: auto;
+}
+
+main.conteudo section article div.apresentacao{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 30px;
+}
+
+main.conteudo section article div.imagem{
+    height: 400px;
+}
+
+main.conteudo section article div.imagem img{
+    height: 400px;
+}
+
+main.conteudo section article div.titulo h1{
+    font-size: 40px;
+}
+
+main.conteudo section article div.titulo h3{
+    color: #6c6c6c;
+    font-weight: 400;
+}
+
+main.conteudo section article div.input input.pesquisar{
+    width: 95%;
+    height: 100%;
+    border: none;
+    padding-left: 30px;
+    outline: none;
+    font-size: 20px;
+}
+
+main.conteudo section article div.input .search{
+    color: #16e2eb;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+main.conteudo section article div.input{
+    width: 100%;
+    border: 1px solid #6c6c6c;
+    border-radius: 10px;
+    height: 60px;
+    position: relative;
+    top: -30px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+}
+
+.body{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px 1fr 340px;
+    grid-template-areas: 
+        'header header'
+        'conteudo conteudo'
+        'footer footer';
+    height: 100vh;
+    background-color: #fff;  
+    
+}
+
+header.header{
+    grid-area: header;
+}
+
+main.conteudo{
+    grid-area: conteudo;
+}
+
+footer.footer{
+    grid-area: footer;
+}

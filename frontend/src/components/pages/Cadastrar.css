@@ -1,0 +1,72 @@
+header.headerFormulario{
+    height: 100px;
+    width: 100%;
+}
+
+header.headerFormulario div{
+    height: 100px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 380px;
+}
+
+header.headerFormulario div img{
+    width: 100%;
+}
+
+main.conteudoFormulario{
+    background-color: #0ae0d6;
+    width: 100%;
+    height: 700px;
+    display: flex;
+}
+
+main.conteudoFormulario img{
+    height: 100%;
+}
+
+main.conteudoFormulario section.secaoFomulario{
+    background-color: #fff;
+    width: 500px;
+    height: 600px;
+    border-radius: 10px;
+}
+
+main.conteudoFormulario section.secaoFomulario h1{
+    margin-top: 5px;
+    text-align: center;
+}
+
+main.conteudoFormulario section.secaoFomulario form{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+main.conteudoFormulario section.secaoFomulario form input{
+    border-radius: 5px;
+    border: 1px solid #848484;
+    height: 40px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+main.conteudoFormulario section.secaoFomulario form button{
+    border: none;
+    height: 40px;
+    background-color: #0ae0d6;
+    color: #fff;
+    font-weight: 600;
+}
+
+main.conteudoFormulario section.secaoFomulario form button:hover{
+    background-color: #076d68;
+}
+
+.msgValidacao{
+    background-color: rgb(207, 101, 101);
+    color: #fff;
+    padding: 5px;
+}

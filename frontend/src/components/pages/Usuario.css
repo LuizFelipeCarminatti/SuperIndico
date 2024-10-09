@@ -1,0 +1,93 @@
+main.content section{
+    width: 60%;
+    margin: 50px auto;
+}
+
+main.content section div form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-top: 50px;
+}
+
+main.content section div form div.inputs{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+main.content section div form div.btns{
+    text-align: center;
+}
+
+main.content section div form div.inputs input{
+    border-radius: 5px;
+    height: 40px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #c4c2c2;
+}
+
+.cpf{
+    margin: 20px;
+}
+
+div.btns button{
+    margin-right: 10px;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+div.btns button.salvar{
+    background-color: #0ae0d6;
+}
+
+div.btns button.delete a{
+    color: #fff;
+    text-decoration: none;
+}
+
+input[type="file"]{
+    display: none;
+}
+
+.enviarImg, .salvarImagem{
+    background-color: #0ae0d6;
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+    margin-left: 5px;
+}
+
+.imagemUsuario{
+    background-color: #272727;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.notification{
+    position: fixed;
+    top: 98%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(60, 200, 60);
+    padding: 10px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 10px 10px 0 0;
+    display: none;
+}
+
+div.notification.show{
+    display: block;
+}
