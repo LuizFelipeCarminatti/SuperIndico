@@ -1,5 +1,6 @@
 const HomeModel = require('../models/HomeModel')
 const bcrypt = require('bcryptjs')
+const JWT = require('jsonwebtoken')
 
 module.exports.saveUsers = async (req, res) => {
     const { nome, email, celular, cpf, city } = req.body
@@ -48,7 +49,7 @@ module.exports.deleteUsuario = async (req, res) => {
 module.exports.getUsuario = async (req, res) => {
 
     try {
-        const user = await HomeModel.findById(req.params.id)
+        const user = await HomeModel.findById(req.params.id, '-password')
 
         if (!user) {
             console.log('Usuário não obtido!')
@@ -76,7 +77,17 @@ module.exports.login = async (req, res) => {
         }
         console.log('Usuário validado!')
 
-        res.status(200).json(user)
+        try {
+            
+            const token = JWT.sign({ id: user._id }, process.env.SECRET_TOKEN, { expiresIn: process.env.EXPIRES_IN_TOKEN })
+            res.cookie('token', token, { httpOnly: false, secure: false })
+            res.status(200).json({ msg: 'Autenticação realizada com sucesso', token, user})
+            
+        } catch (error) {
+            console.error(error)
+            res.status(500).json({ msg: 'Aconteceu um erro no servidor, tente novamente mais tarde' })
+        }
+        
     } catch (error) {
         console.error(error)
     }

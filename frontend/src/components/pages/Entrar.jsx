@@ -18,7 +18,7 @@ const Entrar = props => {
         await axios.post('http://localhost:8080/login', { email, password })
             .then(user =>  {
                 console.log('Usuário não encontrado!')
-                navigate(`/usuario/${user.data._id}`)
+                navigate(`/usuario/${user.data.user._id}`)
             })
             .catch(erros => console.log(erros))
     }

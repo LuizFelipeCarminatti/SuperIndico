@@ -1,11 +1,11 @@
 const express = require('express')
 const route = express.Router()
 const controllers = require('./src/controllers/controller')
-const { ensureAuthenticated, authenticatedRefreshToken } = require('./src/middlewares/middlewares.js')
+const { privada } = require('./src/middlewares/middlewares.js')
 
 route.post('/salvarUsuario', controllers.saveUsers)
 route.get('/usuarios/:city', controllers.getUsuarios)
-route.get('/usuario/:id', controllers.getUsuario)
+route.get('/usuario/:id', privada, controllers.getUsuario)
 route.delete('/usuario/excluir/:id', controllers.deleteUsuario)
 route.put('/usuario/editar/:id', controllers.editarUsuario)
 

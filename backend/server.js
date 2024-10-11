@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const debug = require('debug')('http')
+const cookieParser = require('cookie-parser')
 
 mongoose.connect(process.env.CONNECTION)
     .then(() => {
@@ -35,8 +36,13 @@ const sessionOptions = session({
 })
 
 app.use(sessionOptions)
+app.user(cookieParser())
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+    methods: 'GET, PUT, POST, OPTIONS, DELETE'
+}))
 app.use(helmet())
 app.use(helmet({
     contentSecurityPolicy: {
