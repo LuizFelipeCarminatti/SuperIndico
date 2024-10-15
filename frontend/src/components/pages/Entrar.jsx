@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../img/logo-transparente.png'
 import axios from 'axios'
 import img from '../../img/profisional.jpg'
+import cookies from 'js-cookie'
 
 const Entrar = props => {
 
@@ -15,9 +16,10 @@ const Entrar = props => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await axios.post('http://localhost:8080/login', { email, password })
+        await axios.post('http://localhost:8080/login', { email, password }, { withCredentials: true })
             .then(user =>  {
-                console.log('Usuário não encontrado!')
+                cookies.set('token', user.data.token)
+
                 navigate(`/usuario/${user.data.user._id}`)
             })
             .catch(erros => console.log(erros))

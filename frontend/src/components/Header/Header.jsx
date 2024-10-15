@@ -3,16 +3,18 @@ import './Header.css'
 import logo from '../../img/logo-transparente.png'
 import { Link, useNavigate } from 'react-router-dom'
 import imgUsuario from '../../img/user.jpg'
-import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import api from '../../auth/api'
+import cookies from 'js-cookie'
 
 const Header = props => {
 
     const navigate = useNavigate()
 
     const handleLogin = async () => {
-        const response = await axios.get('http://localhost:8080/espacousuario')
+        const token = cookies.get('token')
+        const response = await api.get('http://localhost:8080/espacousuario', { withCredentials: true, headers: { Authorization: `Bearer ${token}` } })
         navigate(`/usuario/${response.data._id}`)
     }
 

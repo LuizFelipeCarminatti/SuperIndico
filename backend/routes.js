@@ -11,6 +11,6 @@ route.put('/usuario/editar/:id', controllers.editarUsuario)
 
 route.post('/login', controllers.login)
 
-route.get('/espacousuario', controllers.espacoUsuario)
+route.get('/espacousuario', privada, controllers.espacoUsuario)
 
 module.exports = route

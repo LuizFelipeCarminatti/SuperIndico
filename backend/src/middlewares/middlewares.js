@@ -14,16 +14,22 @@ module.exports.csurfMiddleware = (req, res, next) => {
 
 module.exports.privada = (req, res, next) => {
     const authHeader = req.headers['authorization']
-    const token = authHeader && authHeader.split('')[1]
+    const token = authHeader && authHeader.split(' ')[1]
 
     if (!token) {
-        return res.status(401).json({ mesg: 'Acesso negado!' })
+        return res.status(401).json({ msg: 'Acesso negado!' })
     }
 
     try {
-        JWT.verify(token, process.env.SECRET_TOKEN)
+        const decoded = JWT.verify(token, process.env.SECRET_TOKEN)
+
+        res.userID = decoded.id
+
         next()
     } catch (error) {
+
+        console.log(error.message)
+
         res.status(400).json({ msg: 'Token inválido' })
     }
 }

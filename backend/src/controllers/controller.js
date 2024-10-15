@@ -47,14 +47,22 @@ module.exports.deleteUsuario = async (req, res) => {
 }
 
 module.exports.getUsuario = async (req, res) => {
-
     try {
         const user = await HomeModel.findById(req.params.id, '-password')
 
         if (!user) {
             console.log('Usuário não obtido!')
         }
-        res.status(200).json(user)
+        
+        res.status(200).json({
+            _id: user._id,
+            nome: user.nome,
+            cpf: user.cpf,
+            email: user.email,
+            city: user.city,
+            celular: user.celular,
+            sexo: user.sexo || ""
+        })
     } catch (error) {
         console.error(error)
     }
@@ -73,16 +81,13 @@ module.exports.login = async (req, res) => {
         const isValid = await bcrypt.compare(password, user.password)
 
         if (!isValid) {
-            res.status(401).send('Não autorizado')
+            console.log('Não autorizado')
         }
         console.log('Usuário validado!')
 
         try {
-            
             const token = JWT.sign({ id: user._id }, process.env.SECRET_TOKEN, { expiresIn: process.env.EXPIRES_IN_TOKEN })
-            res.cookie('token', token, { httpOnly: false, secure: false })
             res.status(200).json({ msg: 'Autenticação realizada com sucesso', token, user})
-            
         } catch (error) {
             console.error(error)
             res.status(500).json({ msg: 'Aconteceu um erro no servidor, tente novamente mais tarde' })
@@ -94,6 +99,6 @@ module.exports.login = async (req, res) => {
 }
 
 module.exports.espacoUsuario = async (req, res) => {
-    const response = await HomeModel.findById()
+    const response = await HomeModel.findById(res.userID)
     res.status(200).json(response)
 }

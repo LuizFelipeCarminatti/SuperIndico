@@ -40,17 +40,17 @@ const Usuario = props => {
         }
     }
 
-    const getUser = async () => {
+    const getUser = async (id) => {
         try {
-            await api.get(`http://localhost:8080/usuario/${id}`)
+            await api.get(`http://localhost:8080/usuario/${id}`, { withCredentials: true })
                 .then(dados => {
-                    const user = dados.data.user
+                    const user = dados.data
                     setNome(user.nome)
                     setEmail(user.email)
                     setCelular(user.celular)
                     setCity(user.city)
-                    setSexo(user.sexo)
                     setCpf(user.cpf)
+                    setSexo(user.sexo)
                 })
                 .catch(error => console.error(error))
         } catch (error) {
