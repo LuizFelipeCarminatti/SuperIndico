@@ -1,4 +1,9 @@
 main.conteudo section{
+    width: 100%;
+    margin: auto;
+}
+
+main.conteudo section article{
     width: 60%;
     margin: auto;
 }
@@ -52,6 +57,7 @@ main.conteudo section article div.input{
     display: flex;
     align-items: center;
     background-color: #fff;
+    z-index: 0;
 }
 
 .body{
@@ -77,4 +83,85 @@ main.conteudo{
 
 footer.footer{
     grid-area: footer;
+}
+
+section article.listaDeUsuario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+section article ul{
+    display: flex;
+    max-width: 852px;
+    overflow: hidden;
+}
+
+section article ul li.usuario{
+    width: 250px;
+    height: 200px;
+    border: 1px solid #525252;
+    margin: 10px;
+    padding: 10px;
+    list-style: none;
+}
+
+section article.listaDeUsuario button{
+    border: none;
+    background-color: #16e2eb;
+    padding: 5px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.profisionais{
+    text-align: center;
+    background-color: #F8F8F8;
+    padding: 50px;
+}
+
+section.profisionais p.subtitulo{
+    color: #6c6c6c;
+}
+
+.sectionPesquisa{
+    background-color: #fff;
+}
+
+button.arrastar{
+    border: none;
+    position: fixed;
+    left: 95%;
+    top: 90%;
+    padding: 15px;
+    background-color: #16e2eb;
+    border-radius: 10px;
+    color: #fff;
+}
+
+div.contrato{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #dfe1e0;
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+div.contrato button{
+    border-radius: 5px;
+    margin-left: 8px;
+    background-color: #16e2eb;
+    color: #fff;
+    border: none;
+    padding: 5px;
 }

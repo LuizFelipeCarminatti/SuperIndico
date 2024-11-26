@@ -1,0 +1,30 @@
+main{
+    background-color: #F8F8F8;
+    margin: 17px;
+}
+
+main section.perfil{
+    width: 60%;
+    margin: auto;
+    padding: 30px;
+}
+
+main section.perfil ul li{
+    list-style: none;
+}
+
+main section.perfil ul li p .icon{
+    color: #16e2eb;
+    margin: 0px 10px;
+}
+
+.whatsapp{
+    color: #4DC25E;
+    font-size: 30px;
+    background-color: transparent;
+}
+
+main section.perfil ul li p a{
+    text-decoration: none;
+    color: #4DC25E;
+}

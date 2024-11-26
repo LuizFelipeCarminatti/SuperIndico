@@ -10,6 +10,13 @@ const HomeSchema = new Schema(
         cpf: { type: String, required: true },
         city: { type: String, required: true },
         sexo: { type: String, require: false },
+        idade: { type: String, require: false },
+        estrela5: { type: Number, require: false },
+        estrela4: { type: Number, require: false },
+        estrela3: { type: Number, require: false },
+        estrela2: { type: Number, require: false },
+        estrela1: { type: Number, require: false },
+        messages: [{ message: String }]
     },
     { id: true }
 )

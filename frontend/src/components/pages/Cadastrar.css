@@ -70,3 +70,23 @@ main.conteudoFormulario section.secaoFomulario form button:hover{
     color: #fff;
     padding: 5px;
 }
+
+div.notification{
+    position: fixed;
+    top: 98%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(60, 200, 60);
+    padding: 10px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 10px 10px 0 0;
+    display: none;
+}
+
+div.notification.show{
+    display: block;
+}

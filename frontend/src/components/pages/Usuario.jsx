@@ -5,6 +5,7 @@ import Footer from '../Footer/Footer'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import api from '../../auth/api'
+import cookies from 'js-cookie'
 
 const Usuario = props => {
 
@@ -19,11 +20,12 @@ const Usuario = props => {
     const [city, setCity] = useState('')
     const [sexo, setSexo] = useState('')
     const [cpf, setCpf] = useState('')
+    const [idade, setIdade] = useState('')
 
     const handleEdit = async (e) => {
         e.preventDefault()
         try {
-            await axios.put(`http://localhost:8080/usuario/editar/${id}`, { nome, email, password, celular, city, sexo })
+            await axios.put(`http://localhost:8080/usuario/editar/${id}`, { nome, email, password, celular, city, sexo, idade })
             getUser(id);
         } catch (error) {
             console.error(error);
@@ -42,7 +44,8 @@ const Usuario = props => {
 
     const getUser = async (id) => {
         try {
-            await api.get(`http://localhost:8080/usuario/${id}`, { withCredentials: true })
+            const token = cookies.get('token')
+            await api.get(`http://localhost:8080/usuario/${id}`, { withCredentials: true, headers: { Authorization: `Bearer ${token}` } })
                 .then(dados => {
                     const user = dados.data
                     setNome(user.nome)
@@ -51,6 +54,7 @@ const Usuario = props => {
                     setCity(user.city)
                     setCpf(user.cpf)
                     setSexo(user.sexo)
+                    setIdade(user.idade)
                 })
                 .catch(error => console.error(error))
         } catch (error) {
@@ -110,6 +114,8 @@ const Usuario = props => {
                                     <option value="mulher">Mulher</option>
                                     <option value="homem">Homem</option>
                                 </select>
+                                <label htmlFor="idade">Data de nascimento:</label>
+                                <input type="text" name="idade" id="idade" value={idade} placeholder="00/00/00" onChange={(e) => setIdade(e.target.value)}/>
                             </div>
                             <div className="btns">
                                 <button type="button" className="bg-danger delete" onClick={() => handleDelete()}><Link to="http://localhost:3000">Delete conta</Link></button>

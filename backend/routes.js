@@ -13,4 +13,10 @@ route.post('/login', controllers.login)
 
 route.get('/espacousuario', privada, controllers.espacoUsuario)
 
+route.post('/logout', controllers.logout)
+
+route.get('/primeirosUsuarios', controllers.getPrimeirosUsuario)
+
+route.get('/perfil/:id', controllers.perfil)
+
 module.exports = route

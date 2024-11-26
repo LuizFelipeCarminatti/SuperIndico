@@ -13,6 +13,8 @@ import Termos from './components/pages/Termos'
 import Politica from './components/pages/Politica'
 import QuemSomos from './components/pages/QuemSomos'
 import Usuario from './components/pages/Usuario'
+import Perfil from './components/pages/Perfil'
+import Reputacao from './components/pages/Reputacao'
 
 const App = props => {
   return (
@@ -27,6 +29,8 @@ const App = props => {
           <Route path="/termos" element={<Termos />} />
           <Route path="/politica" element={<Politica />} />
           <Route path="/quemsomos" element={<QuemSomos />} />
+          <Route path="/perfil/:id" element={<Perfil />} />
+          <Route path='/reputacao' element={<Reputacao />} />
         </Routes>
     </BrowserRouter>
   );

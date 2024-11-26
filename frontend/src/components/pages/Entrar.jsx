@@ -18,9 +18,9 @@ const Entrar = props => {
         e.preventDefault()
         await axios.post('http://localhost:8080/login', { email, password }, { withCredentials: true })
             .then(user =>  {
-                cookies.set('token', user.data.token)
+                cookies.set('token', user.data.token, { expires: 3 })
 
-                navigate(`/usuario/${user.data.user._id}`)
+                navigate('/')
             })
             .catch(erros => console.log(erros))
     }
@@ -37,6 +37,7 @@ const Entrar = props => {
             <main>
                 <section className="espacoLogin">
                     <form onSubmit={handleSubmit} method="post" className="formLogin">
+                        <input type="hidden" name="_csrf" value={'csrfToken'}/>
                         <label htmlFor="email">E-mail: </label>
                         <input type="text" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Digite seu email:"/>
                         <label htmlFor="password">Senha: </label>

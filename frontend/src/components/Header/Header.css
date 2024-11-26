@@ -1,5 +1,5 @@
 div.menu{
-    position: fixed;
+    position: relative;
     width: 60%;
     height: 100px;
     left: 50%;
@@ -24,8 +24,9 @@ div.logo img{
     width: 100%;
 }
 
+
 div.btnLogin button{
-    margin-left: 10px;
+    margin-left: 1px;
     border: none;
     padding: 20px;
     background-color: transparent;
@@ -44,4 +45,13 @@ div.btnLogin button a{
 
 .imgEspacoUsuario{
     width: 50px;
+}
+
+div.btnLogin button.perfil{
+    border-radius: 100px;
+    padding: 0px;
+}
+
+header.header{
+    z-index: 1;
 }

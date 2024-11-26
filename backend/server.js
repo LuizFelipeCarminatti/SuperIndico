@@ -4,6 +4,20 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const debug = require('debug')('http')
+const { createServer } = require('node:http')
+const server = createServer(app)
+const { Server } = require('socket.io')
+const io = new Server(server,
+    {
+        cors: {
+            origin: "http://localhost:3000",
+            methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        },
+        connectionStateRecovery: {}
+    }
+)
+
+const HomeModel = require('./src/models/HomeModel')
 
 mongoose.connect(process.env.CONNECTION)
     .then(() => {
@@ -70,7 +84,7 @@ function normalizePort(val) {
     const port = parseInt(val, 10)
 
     if (isNaN(port)) {
-        return  val
+        return val
     }
 
     if (port >= 0) {
@@ -95,7 +109,7 @@ function onError(error) {
         case 'EADDRINUSE':
             console.error(bind + 'is already in use')
             process.exit(1)
-            break    
+            break
         default:
             throw error
     }
@@ -107,8 +121,69 @@ function onListening() {
     debug('Listening on' + bind)
 }
 
+const users = []
+
+io.on('connection', (socket) => {
+    console.log('Conectado', socket.id)
+
+    socket.on('join', async (data) => {
+
+        io.in(data.id).socketsLeave(data.id);
+
+        if (data && data.id) {
+            users.push({
+                socketId: socket.id,
+                userId: data.id,
+                nome: data.nome
+            })
+            
+            const user = await HomeModel.findById(data.id)
+            
+            user.messages.map(async (message) => {
+                if (message) {
+                    await socket.emit('new-requested-services', { message: message.message })
+                    await HomeModel.updateMany({ _id: user._id }, { $pull: { messages: { message: message.message } } })
+                }
+                return
+            })
+
+            socket.join(data.id);
+
+        } else {
+            console.error("Dados de usuário inválidos na conexão");
+        }
+    });
+
+    socket.on('request-services', (dados) => {
+        const user = users.find(user => user.socketId === socket.id)
+    
+        if (!user) {
+            console.error("User ID não encontrado para este socket.");
+            return;
+        }
+        const message = `Nova solicitação de seus serviços do cliente: ${user.nome}`
+
+        const id = dados.id;
+
+        const salvarMensagem = async () => {
+            if (users.find(user => user.userId === id)) {
+                io.to(id).emit('new-requested-services', { message });
+            } else {
+                await HomeModel.findByIdAndUpdate(id, { $push: { messages: { message: message } }})
+            }
+        }
+        salvarMensagem()
+
+    });
+
+    socket.on('disconnect', () => {
+        delete users[socket.id]
+        console.log(`Usuário ${socket.id} desconectou.`)
+    });
+});
+
 app.on('Executando', () => {
-    app.listen(port, () => {
+    server.listen(port, () => {
         console.log(`Executando na porta ${port}`)
     })
 })

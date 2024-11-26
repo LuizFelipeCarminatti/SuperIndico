@@ -27,6 +27,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.9.0",
     "mongoose": "^8.7.0",
-    "regenerator-runtime": "^0.14.1"
+    "regenerator-runtime": "^0.14.1",
+    "socket.io": "^4.8.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
   }
 }

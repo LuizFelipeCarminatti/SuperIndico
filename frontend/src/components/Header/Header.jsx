@@ -7,15 +7,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import api from '../../auth/api'
 import cookies from 'js-cookie'
+import axios from 'axios'
+
 
 const Header = props => {
-
+    
     const navigate = useNavigate()
-
+    
     const handleLogin = async () => {
         const token = cookies.get('token')
         const response = await api.get('http://localhost:8080/espacousuario', { withCredentials: true, headers: { Authorization: `Bearer ${token}` } })
         navigate(`/usuario/${response.data._id}`)
+    }
+
+    const logout = async () => {
+        await axios.post('http://localhost:8080/logout', {}, { withCredentials: true })
+        navigate('/entrar')
     }
 
     return (
@@ -29,7 +36,7 @@ const Header = props => {
                 <div className="btnLogin">
                     <button type="button" className="button">
                         <Link to="/cadastrar">
-                            Seja um profissional
+                            Cadastra-se
                         </Link>
                     </button>
                     <button type="button" className="button">
@@ -37,8 +44,11 @@ const Header = props => {
                             <FontAwesomeIcon icon={faUser} /> Entrar
                         </Link>
                     </button>
-                    <button type="button" onClick={handleLogin}>
+                    <button type="button" onClick={handleLogin} className="perfil">
                         <img src={imgUsuario} alt="Espaço usuário" className="imgEspacoUsuario" title="Conta usuário" />
+                    </button>
+                    <button type="button" className="mx-0" onClick={logout}>
+                        sair da conta
                     </button>
                 </div>
             </div>

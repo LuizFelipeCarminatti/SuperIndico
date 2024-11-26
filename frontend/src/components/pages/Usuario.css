@@ -91,3 +91,7 @@ div.notification{
 div.notification.show{
     display: block;
 }
+
+select#sexo{
+    margin-bottom: 20px;
+}

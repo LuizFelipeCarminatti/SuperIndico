@@ -17,11 +17,11 @@ module.exports.saveUsers = async (req, res) => {
 module.exports.getUsuarios = async (req, res) => {
     const { city } = req.params
     try {
-        const users = await HomeModel.find({ city })
+        const users = await HomeModel.find({ city }, '-password')
         if (!users) {
             res.status(404).send('Nenhum usuário obtido!')
         }
-        res.json(users).select('-password').exec()
+        res.json(users)
     } catch (error) {
         console.error(error)
     }
@@ -30,9 +30,9 @@ module.exports.getUsuarios = async (req, res) => {
 module.exports.editarUsuario = async (req, res) => {
     const { id } = req.params
 
-    const { nome, email, password, celular, city, sexo } = req.body
+    const { nome, email, password, celular, city, sexo, idade } = req.body
 
-    const response = await HomeModel.findByIdAndUpdate(id, { nome, email, password, celular, city, sexo })
+    const response = await HomeModel.findByIdAndUpdate(id, { nome, email, password, celular, city, sexo, idade })
 
     return res.status(200).json(response)
 
@@ -61,7 +61,8 @@ module.exports.getUsuario = async (req, res) => {
             email: user.email,
             city: user.city,
             celular: user.celular,
-            sexo: user.sexo || ""
+            sexo: user.sexo || "",
+            idade: user.idade,
         })
     } catch (error) {
         console.error(error)
@@ -84,9 +85,9 @@ module.exports.login = async (req, res) => {
             console.log('Não autorizado')
         }
         console.log('Usuário validado!')
-
         try {
-            const token = JWT.sign({ id: user._id }, process.env.SECRET_TOKEN, { expiresIn: process.env.EXPIRES_IN_TOKEN })
+            let tempo = 10 * 24 * 60 * 60 * 1000
+            const token = JWT.sign({ id: user._id }, process.env.SECRET_TOKEN, { expiresIn: tempo })
             res.status(200).json({ msg: 'Autenticação realizada com sucesso', token, user})
         } catch (error) {
             console.error(error)
@@ -102,3 +103,27 @@ module.exports.espacoUsuario = async (req, res) => {
     const response = await HomeModel.findById(res.userID)
     res.status(200).json(response)
 }
+
+module.exports.logout = (req, res) => {
+    res.clearCookie('token')
+    res.json({ msg: 'Logout realizado com sucesso' })
+}
+
+module.exports.getPrimeirosUsuario = async (req, res) => {
+    try {
+        const users = await HomeModel.find().limit(6)
+        res.status(200).json(users)
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+module.exports.perfil = async (req, res) => {
+    try {
+        const user = await HomeModel.findById(req.params.id)
+        res.status(200).json(user)
+    } catch (error) {
+        console.error(error)
+    }
+}
+
